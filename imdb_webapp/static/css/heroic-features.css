@@ -1,0 +1,34 @@
+/*!
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template-overviews/shop-homepage)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+ body {
+  background-image: url('popcorn.jpg');
+  background-size:cover;
+  padding-top: 56px;
+}
+
+.search{
+  width: 700px;
+  height: 100px;
+  position: relative;
+}
+
+.movie_home{
+  background-image: url('resim.jpg');
+ 
+  background-size:contain;
+  padding-top: 56px;
+
+}
+
+.info{
+  background-image: none;
+ 
+  background-size:contain;
+  padding-top: 56px;
+
+}
+
+

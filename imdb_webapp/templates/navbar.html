@@ -1,0 +1,66 @@
+
+ 
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <div class="container">
+                <a class="navbar-brand" href="#">Secbifilm.com</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                    <li  class="nav-item active">
+                        <a class="nav-link" href="{{('home')}}">Home
+                        <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li id="movies" class="nav-item">
+                        <a class="nav-link" href="{{('movie_home')}}">Movies</a>
+                    </li>
+                    <li id=imdb class="nav-item">
+                        <a class="nav-link" href="{{('actor')}}">Actors</a>
+                    </li>
+                    <li id=contact class="nav-item">
+                        <a class="nav-link" href="{{('getdb')}}">Search</a>
+                    </li>
+                    {%if current_user.is_authenticated%}
+                        <li id="logout" class="nav-item">
+                            <a class="nav-link" href="{{('logout')}}">Logout</a>
+                        </li>
+                        <li id="account" class="nav-item">
+                            <a class="nav-link" href="{{('account')}}">Account</a>
+                        </li>
+                        <li id="account" class="nav-item">
+                                <a class="nav-link" href="{{('watchlist')}}">My Watchlist</a>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-default btn-outline btn-circle"  data-toggle="collapse" href="#nav-collapse1" aria-expanded="false" aria-controls="nav-collapse1">New Post</a>
+                        </li>
+                            
+                            <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse1">
+                                <li id="account" class="nav-item">
+                                    <a class="nav-link" href="{{('new_movie')}}">New Movie</a>
+                                 </li>
+                
+                              <li id="account" class="nav-item">
+                                    <a class="nav-link" href="{{('new_actor')}}">New Actor</a>
+                              </li>
+        
+                              
+                            </ul>
+                        
+                        
+                        
+                    {%else%}
+                        <li id="signup" class="nav-item">
+                            <a class="nav-link" href="{{('register')}}">Sign Up</a>
+                         </li>
+                        <li id=login class="nav-item">
+                            <a class="nav-link" href="{{('login')}}">Login</a>
+                        </li>
+                    {%endif%}
+                    </ul>
+                </div>
+                </div>
+            </nav>
+       

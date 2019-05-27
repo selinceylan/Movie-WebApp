@@ -1,0 +1,46 @@
+{%extends "layout.html" %}
+{% block content%}
+    {% for movie in posts.items %}
+     <body class="movie_home">
+     <hr>
+     <div class="container-fluid"> 
+     
+        <div class="row row-centered text-center">
+          
+        
+            <div  style="width:800px; margin:0 auto;" class="col-lg-6 col-md-6 mb-4" >
+             <div class=" bg-dark">
+             <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="{{movie.image_movie}}" alt=""></a>
+                
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="{{url_for('movie', movie_id=movie.id)}}">{{ movie.title}}</a>
+                    </h4>
+                    <h5>({{ movie.year}})</h5>
+                    <p class="card-text"><b>Director:</b>{{ movie.director}}</p>
+                    <p class="card-text"><b>Stars:</b>{{ movie.star}}</p>
+                    
+                </div>
+                <div class="card-footer">
+                    
+                </div>
+             </div>
+             </div>
+         </div>
+        </div>
+      </div>
+     </body>
+            
+    {% endfor %}
+    {% for page_num in posts.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
+            {%if page_num%}
+                {%if posts.page==page_num%}
+                    <a class="btn btn-info mb-4" href="{{url_for('movie_home',page=page_num)}}">{{page_num}}</a>
+                {%else%}
+                    <a class="btn btn-outline-info mb-4" href="{{url_for('movie_home',page=page_num)}}">{{page_num}}</a>
+                {%endif%}
+            {%else%}
+            {%endif%}
+    {% endfor %}    
+{%endblock%}

@@ -1,0 +1,157 @@
+{%extends "layout.html" %}
+{% block content%}
+  
+  <body class="info">
+        <!-- Page Content -->
+        <div class="container ">
+        
+
+        <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4">{{title}}</h1>
+
+        <!-- Author -->
+        <h3 class="mt-4">({{year}})</h3>
+        <h3 class="mt-4"><b>IMDB:</b>{{prediction}}</h3>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>{{ runtime}} | {{genre}}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="{{image_movie}}" alt="">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">{{ description }}</p>
+
+        <p><b>Director:</b>{{ director}}</p>
+        
+        <p><b>Stars:</b>{{ star}}</p>
+        {%if current_user.is_authenticated%}
+            
+            <a class="btn btn-info" href="{{('watchlist')}}">Add to Watchlist</a>
+            <div>
+              <a class="btn btn-secondary btn-sm m-1" href="{{url_for('update_movie', movie_id=movie_id)}}">Update</a>
+              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            </div>
+
+        {%else%}
+            <button type="submit" class="btn btn-info">Login Add to Watchlist</button>
+        
+
+        {%endif%}
+        <hr>
+        <h4 style="color:white"><b>Recommended Films</b></h4>
+        <div class="card my-4">
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action ">{{Recommended1}}</a>  
+              <a href="#" class="list-group-item list-group-item-action">{{Recommended2}}</a>
+              <a href="#" class="list-group-item list-group-item-action">{{Recommended3}}</a>
+              <a href="#" class="list-group-item list-group-item-action">{{Recommended4}}</a>
+              <a href="#" class="list-group-item list-group-item-action">{{Recommended5}}</a>
+         </div>
+        
+      </div>
+      
+      <hr>
+
+      
+
+        <!-- Comments Form -->
+        <div class="card my-4">
+          
+          <h5 class="card-header">Leave a Comment:</h5>
+          <div class="card-body">
+            <form method="POST" action="">
+              {{form.hidden_tag()}}
+              <div class="form-group">
+                  {{form['title'].label(class="form-control-label")}}
+                        
+                  {% if form['title'].errors %}
+                  {{form['title'](class="form-control form-control-lg is-invalid")}}
+                  <div class="invalid-feedback">
+                      {%for error in form['title'].errors %}
+                          <span>{{error}}</span>
+                      {%endfor%}
+
+                  </div>
+               {%else%}
+                  {{form['title'](class="form-control form-control-lg")}}
+               {%endif%}
+              </div>
+              <div class="form-group">
+                  {{form['content'].label(class="form-control-label")}}
+                        
+                  {% if form['content'].errors %}
+                  {{form['content'](class="form-control form-control-lg is-invalid")}}
+                  <div class="invalid-feedback">
+                      {%for error in form['content'].errors %}
+                          <span>{{error}}</span>
+                      {%endfor%}
+
+                  </div>
+               {%else%}
+                  {{form['content'](class="form-control form-control-lg")}}
+               {%endif%}
+              </div>
+              <div class="form-group">
+                  <br>
+                  {{form['submit'](class="btn btn-outline-info")}}
+              </div>
+              
+            </form>
+          </div>
+        </div>
+
+        <!-- Single Comment -->
+       {%for post in posts%} 
+          <div class="media mb-4">
+            <img class=" d-flex mr-3 rounded-circle article-img" src="{{url_for('static',filename='profile_pics/'+post.author.image_file)}}" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">{{post.author.username}}</h5>
+            <h3>{{post.title}}</h3>
+            {{post.content}}
+            </div>
+         
+          </div>
+        {%endfor%}
+
+        
+    
+        </div>
+         <!-- /.container -->
+       <!-- Modal Delete Post-->
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <form action="{{url_for('delete_movie',movie_id=movie_id)}}" method="POST">
+             <input class="btn btn-danger" type="submit" value="Delete">
+           </form>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+  </div>
+  </body>
+
+    
+   
+{%endblock%}
